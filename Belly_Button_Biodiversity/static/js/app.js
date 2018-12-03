@@ -41,16 +41,38 @@ function buildCharts(sample) {
   d3.json(url).then(function(response){
     // @TODO: Build a Bubble Chart using the sample data
       console.log(response)
-      trace = {x: response.otu_ids,
-              y: response.sample_values,
-              mode: "markers"
-      }
-      var data = [trace];
 
-      var layout = {title: "Belly button bubble plot"
+
+      var data = []
+      for (var i = 0; i < response.otu_ids.length; i++) { 
+        
+        data.push({
+          x: [response.otu_ids[i]],
+          y: [response.sample_values[i] ],
+          mode: "markers",
+          name: response.otu_labels[i],
+          marker: {
+            size: [response.sample_values[i]],
+            color: [response.otu_ids[i]],
+          }
+        })      
+      }
+    console.log(data)
+
+
+      
+      // trace = {x: response.otu_ids,
+      //         y: response.sample_values,
+      //         mode: "markers"
+      // }
+      // var data = [trace];
+
+      var layout = {
+        title: "Belly button bubble plot",
+        showlegend: false,
       }
 
-      Plotly.newPlot("bubble",data, layout )
+      Plotly.newPlot("bubble", data, layout )
     
     // @TODO: Build a Pie Chart
     // HINT: You will need to use slice() to grab the top 10 sample_values,

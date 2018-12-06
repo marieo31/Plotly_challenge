@@ -31,7 +31,7 @@ function buildMetadata(sample) {
       // Enter a speed between 0 and 180
       // var level = response.WFREQ;
       // Enter a speed between 0 and 180
-      var level = 3; //response.WFREQ;
+      var level = response.WFREQ;
 
       var nb_div = 10;
       var val_max = 9;
@@ -42,9 +42,9 @@ function buildMetadata(sample) {
       var radians = degrees * Math.PI / 180;
       var x = radius * Math.cos(radians);
       var y = radius * Math.sin(radians);
-      console.log(degrees)
-      console.log(x)
-      console.log(y)
+      // console.log(degrees)
+      // console.log(x)
+      // console.log(y)
 
       // Path: may have to change to create a better triangle
       var mainPath = 'M -.0 -0.025 L .0 0.025 L ',
@@ -55,7 +55,7 @@ function buildMetadata(sample) {
       var path = mainPath.concat(pathX,space,pathY,pathEnd);
 
 
-      console.log(Array(nb_div).fill(50/nb_div).concat(50))
+      // console.log(Array(nb_div).fill(50/nb_div).concat(50))
       var data = [
         { type: 'scatter',
         x: [0], y:[0],
@@ -69,13 +69,17 @@ function buildMetadata(sample) {
         text: ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0', ''],
         textinfo: 'text',
         textposition:'inside',
-        marker: {colors:['rgba(14, 127, 0, .5)', 
-                         'rgba(110, 154, 22, .5)',
-                         'rgba(170, 202, 42, .5)', 
-                         'rgba(202, 209, 95, .5)',
-                         'rgba(210, 206, 145, .5)', 
-                         'rgba(232, 226, 202, .5)',
-                         'rgba(255, 255, 255, 0)'
+        marker: {colors:['rgba(0, 230, 0,     0.8)', 
+                         'rgba(0, 255, 0,     0.8)',
+                         'rgba(26, 255, 26,   0.8)',
+                         'rgba(51, 255, 51,   0.8)',
+                         'rgba(77, 255, 77,   0.8)',
+                         'rgba(102, 255, 102, 0.8)', 
+                         'rgba(153, 255, 153, 0.8)',
+                         'rgba(179, 255, 179, 0.8)',
+                         'rgba(204, 255, 204, 0.8)',
+                         'rgba(230, 255, 230, 0.8)',
+                        'rgba(255, 255, 255, 0)',
                         ]},
         labels: ['9', '8', '7', '6', '5', '4', '3', '2', '1', '0', ''],
         hoverinfo: 'label',
@@ -93,7 +97,7 @@ function buildMetadata(sample) {
               color: '850000'
             }
           }],
-        title: 'Gauge Speed 0-100',
+        title: 'Belly button Washin frequency <br> Scrubs per week',
         // height: 1000,
         // width: 1000,
         xaxis: {zeroline:false, showticklabels:false,
@@ -136,6 +140,9 @@ function buildCharts(sample) {
       var layout = {
         title: "Belly button bubble plot",
         showlegend: false,
+        xaxis: {title:"IDs",
+                } ,
+        yaxis: {title:"Sample values"} ,
       }
 
       Plotly.newPlot("bubble", data, layout )
@@ -176,6 +183,7 @@ function buildCharts(sample) {
       }];
       
       var layout_pie = {
+        title: "Belly button top 10",
         showlegend: true,
         legend: {
           x: 1,
@@ -221,19 +229,3 @@ function optionChanged(newSample) {
 // Initialize the dashboard
 init();
 
-
-    //   var data = []
-    //   for (var i = 0; i < response.otu_ids.length; i++) { 
-        
-    //     data.push({
-    //       x: [response.otu_ids[i]],
-    //       y: [response.sample_values[i] ],
-    //       mode: "markers",
-    //       name: response.otu_labels[i],
-    //       marker: {
-    //         size: [response.sample_values[i]],
-    //         color: [response.otu_ids[i]],
-    //       }
-    //     })      
-    //   }
-    // console.log(data)
